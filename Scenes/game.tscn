@@ -145,7 +145,7 @@ position = Vector2(438.47, 55.955)
 rotation = 1.5708
 scale = Vector2(1.73991, 10.5641)
 
-[node name="Interactable" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("3_s5awh")]
+[node name="InteractableDoor" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("3_s5awh")]
 position = Vector2(195.912, 52.2247)
 scale = Vector2(2.08557, 1)
 interaction_name = "Front Door"
@@ -154,14 +154,14 @@ target_node_path = NodePath(".")
 method_name = "open_door"
 collision_shape = NodePath("CollisionShape2D")
 
-[node name="Sprite2D" parent="Interactable" index="0"]
+[node name="Sprite2D" parent="InteractableDoor" index="0"]
 scale = Vector2(0.226904, 0.215519)
 
-[node name="CollisionShape2D" parent="Interactable" index="1"]
+[node name="CollisionShape2D" parent="InteractableDoor" index="1"]
 position = Vector2(0.406662, -3.8147e-06)
 debug_color = Color(1, 0, 0, 0.2)
 
-[node name="Label" parent="Interactable" index="2"]
+[node name="Label" parent="InteractableDoor" index="2"]
 offset_left = 39.0388
 offset_top = -74.6067
 offset_right = 79.0388
@@ -199,6 +199,6 @@ method_name = "guiri_ending"
 
 [editable path="Player"]
 [editable path="Container"]
-[editable path="Interactable"]
+[editable path="InteractableDoor"]
 [editable path="Phone"]
 [editable path="Interactable4"]
