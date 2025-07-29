@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://b12qww5uava5d"]
+
+[ext_resource type="Script" path="res://Scripts/interactable.gd" id="1_6b882"]
+[ext_resource type="Texture2D" uid="uid://1k84f57848mh" path="res://icon.svg" id="2_035kh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mkiag"]
+radius = 37.5974
+
+[sub_resource type="Animation" id="Animation_nh13k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3ec58"]
+resource_name = "open_door"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1glox"]
+_data = {
+"RESET": SubResource("Animation_nh13k"),
+"open_door": SubResource("Animation_3ec58")
+}
+
+[node name="Interactable" type="Area2D"]
+script = ExtResource("1_6b882")
+consume_required_item = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.248314, 0.248314)
+texture = ExtResource("2_035kh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4.76837e-07)
+shape = SubResource("CircleShape2D_mkiag")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 39.0
+offset_top = -34.0
+offset_right = 79.0
+offset_bottom = -11.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1glox")
+}
+
+[connection signal="input_event" from="." to="." method="_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -1,0 +1,204 @@
+[gd_scene load_steps=11 format=3 uid="uid://b5onh7ft1nwvt"]
+
+[ext_resource type="PackedScene" uid="uid://y2iwv71cicbc" path="res://Scenes/player.tscn" id="1_on0h5"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_qcyhp"]
+[ext_resource type="PackedScene" uid="uid://b3y46tblcpc3q" path="res://Scenes/obstacle.tscn" id="2_1gcuw"]
+[ext_resource type="PackedScene" uid="uid://b12qww5uava5d" path="res://Scenes/interactable.tscn" id="3_s5awh"]
+[ext_resource type="Texture2D" uid="uid://1k84f57848mh" path="res://icon.svg" id="5_ktcbc"]
+[ext_resource type="Script" path="res://Scripts/InventoryManager.gd" id="5_wkh0u"]
+[ext_resource type="PackedScene" uid="uid://b5fqk2x8bldcc" path="res://Scenes/container.tscn" id="6_pvcx7"]
+[ext_resource type="PackedScene" uid="uid://bwsssmcs8gnf2" path="res://Scenes/phoneUI.tscn" id="8_er1vp"]
+[ext_resource type="Script" path="res://Scripts/LoopManager.gd" id="9_2oub8"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_s02tj"]
+vertices = PackedVector2Array(53.4766, -5.52344, 58.8984, -266.297, 166.023, -225.57, 170.469, -17.6328, 456.063, 516.148, 443.281, 851.922, 145.797, 803.93, 178.563, 509.781, 307.68, 512.453, 269.594, 508.852, 286.5, 116.508, 268.57, 395.469, 187.258, 118.391, 57.6172, 400.109, 61.5938, 114.188, 168.438, 111.406, 188.461, 81.5313, 195.117, -3.17969, 211.672, -296.43, 277.977, -316.383, 511.156, -316.383, 523.883, -13.3828)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(8, 7, 9), PackedInt32Array(10, 8, 9, 11), PackedInt32Array(12, 10, 11, 13), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 12, 15, 3), PackedInt32Array(17, 16, 3, 2, 18), PackedInt32Array(19, 20, 21, 17, 18)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(51.7297, 104.452, 158.591, 101.659, 160.292, -6.52092, 43.2531, 5.59743, 49.2026, -280.705, 161.999, -237.802, 205.255, -304.946, 276.497, -326.392, 520.751, -326.381, 534.306, -3.70646, 204.393, 6.53722, 198.453, 82.0762, 197.604, 108.189, 295.984, 106.328, 317.169, 502.677, 466.435, 506.414, 452.849, 863.593, 134.812, 812.286, 169.599, 499.872, 259.498, 498.944, 258.654, 405.685, 47.4755, 410.339)])
+
+[node name="Game" type="Node2D"]
+position = Vector2(3, 7)
+scale = Vector2(1.1791, 1.07229)
+script = ExtResource("1_qcyhp")
+metadata/_edit_vertical_guides_ = [-133.0]
+
+[node name="LoopManager" type="Node" parent="."]
+script = ExtResource("9_2oub8")
+
+[node name="Player" parent="." instance=ExtResource("1_on0h5")]
+position = Vector2(253.583, 227.55)
+collision_layer = 2
+
+[node name="UI" parent="Player/Camera2D" index="0"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Hotbar" parent="Player/Camera2D/UI" index="0"]
+offset_left = 110.964
+offset_top = 192.213
+offset_right = 418.964
+offset_bottom = 232.213
+
+[node name="MessageLabel" parent="Player/Camera2D/UI" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.999
+offset_top = 64.8645
+offset_right = -18.999
+offset_bottom = 87.8645
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoopTimer" parent="Player/Camera2D/UI" index="2"]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 40.0
+offset_bottom = 23.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(17.8102, -0.932584)
+rotation = -4.46802e-05
+navigation_polygon = SubResource("NavigationPolygon_s02tj")
+
+[node name="InventoryManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_wkh0u")
+
+[node name="Container" parent="." instance=ExtResource("6_pvcx7")]
+position = Vector2(195.912, 131.494)
+scale = Vector2(2.80888, 2.28331)
+container_name = "Carpet"
+contents = Array[String](["Front Door Key"])
+
+[node name="Sprite2D" parent="Container" index="0"]
+scale = Vector2(0.200755, 0.175187)
+texture = ExtResource("5_ktcbc")
+
+[node name="Label" parent="Container" index="2"]
+offset_left = 21.4376
+offset_top = -11.0276
+offset_right = 61.4376
+offset_bottom = 11.9724
+scale = Vector2(0.479162, 0.593401)
+
+[node name="Panel" parent="Container" index="3"]
+z_index = 100
+offset_left = 22.6453
+offset_top = 4.49291
+offset_right = 62.6453
+offset_bottom = 44.4929
+scale = Vector2(0.330615, 0.444977)
+
+[node name="StaticBody2D" parent="." instance=ExtResource("2_1gcuw")]
+position = Vector2(18.6583, 241.539)
+scale = Vector2(1.73991, 12.2055)
+
+[node name="StaticBody2D7" parent="." instance=ExtResource("2_1gcuw")]
+position = Vector2(-117.038, 241.539)
+scale = Vector2(1.73991, 12.2055)
+
+[node name="StaticBody2D8" parent="." instance=ExtResource("2_1gcuw")]
+position = Vector2(16.9621, -122.168)
+scale = Vector2(1.73991, 3.96146)
+
+[node name="StaticBody2D2" parent="." instance=ExtResource("2_1gcuw")]
+position = Vector2(364.685, 241.539)
+scale = Vector2(1.73991, 12.2055)
+
+[node name="StaticBody2D11" parent="." instance=ExtResource("2_1gcuw")]
+position = Vector2(593.673, -156.674)
+scale = Vector2(1.73991, 12.392)
+
+[node name="StaticBody2D3" parent="." instance=ExtResource("2_1gcuw")]
+position = Vector2(161.988, 450.438)
+rotation = 1.5708
+scale = Vector2(1.73991, 6.42344)
+
+[node name="StaticBody2D4" parent="." instance=ExtResource("2_1gcuw")]
+position = Vector2(100.076, 55.955)
+rotation = 1.5708
+scale = Vector2(1.73991, 3.88681)
+
+[node name="StaticBody2D9" parent="." instance=ExtResource("2_1gcuw")]
+position = Vector2(61.0635, -312.415)
+rotation = 1.5708
+scale = Vector2(1.73991, 3.88681)
+
+[node name="StaticBody2D10" parent="." instance=ExtResource("2_1gcuw")]
+position = Vector2(457.976, -368.37)
+rotation = 1.5708
+scale = Vector2(1.73991, 9.55692)
+
+[node name="StaticBody2D5" parent="." instance=ExtResource("2_1gcuw")]
+position = Vector2(438.47, 55.955)
+rotation = 1.5708
+scale = Vector2(1.73991, 10.5641)
+
+[node name="Interactable" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("3_s5awh")]
+position = Vector2(195.912, 52.2247)
+scale = Vector2(2.08557, 1)
+interaction_name = "Front Door"
+required_item = "Front Door Key"
+target_node_path = NodePath(".")
+method_name = "open_door"
+collision_shape = NodePath("CollisionShape2D")
+
+[node name="Sprite2D" parent="Interactable" index="0"]
+scale = Vector2(0.226904, 0.215519)
+
+[node name="CollisionShape2D" parent="Interactable" index="1"]
+position = Vector2(0.406662, -3.8147e-06)
+debug_color = Color(1, 0, 0, 0.2)
+
+[node name="Label" parent="Interactable" index="2"]
+offset_left = 39.0388
+offset_top = -74.6067
+offset_right = 79.0388
+offset_bottom = -51.6067
+scale = Vector2(0.619344, 1.55555)
+
+[node name="StaticBody2D6" parent="." instance=ExtResource("2_1gcuw")]
+position = Vector2(-58.5192, 53.1573)
+scale = Vector2(4.60184, 1.82655)
+
+[node name="PhoneUI" parent="." instance=ExtResource("8_er1vp")]
+visible = false
+
+[node name="Phone" parent="." instance=ExtResource("3_s5awh")]
+position = Vector2(533.458, -306.82)
+interaction_name = "Phone"
+consume_required_item = false
+target_node_path = NodePath("../PhoneUI")
+method_name = "open"
+
+[node name="Interactable2" parent="." instance=ExtResource("3_s5awh")]
+position = Vector2(74.6332, -83.9325)
+interaction_name = "Emergency Number"
+consume_required_item = false
+target_node_path = NodePath(".")
+method_name = "use_emergency_number_item"
+
+[node name="Interactable4" parent="." instance=ExtResource("3_s5awh")]
+position = Vector2(307.862, 619.235)
+target_node_path = NodePath(".")
+method_name = "guiri_ending"
+
+[connection signal="diddy_time" from="LoopManager" to="LoopManager" method="_on_diddy_time"]
+[connection signal="loop_restarted" from="LoopManager" to="Player" method="_on_loop_manager_loop_restarted"]
+
+[editable path="Player"]
+[editable path="Container"]
+[editable path="Interactable"]
+[editable path="Phone"]
+[editable path="Interactable4"]

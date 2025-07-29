@@ -1,0 +1,5 @@
+if {HasInteractedEmergencyNumber} == false:
+	Brayan: Oh, the emergency number, now I remember, 333893133.
+	set {HasInteractedEmergencyNumber} = true
+else:
+	Brayan: I've read this number before

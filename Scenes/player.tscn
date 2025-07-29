@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://y2iwv71cicbc"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_rpve6"]
+[ext_resource type="Texture2D" uid="uid://bi0xnryexrcxq" path="res://Assets/pixel_art_small.png" id="2_3kvow"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hjpe7"]
+radius = 7.15891
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 4
+script = ExtResource("1_rpve6")
+speed = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-1.90735e-06, 2.38419e-07)
+scale = Vector2(1.23404, 1.25147)
+texture = ExtResource("2_3kvow")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("CircleShape2D_hjpe7")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 20.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="UI" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 359.596
+offset_top = 266.719
+offset_right = 399.596
+offset_bottom = 306.719
+
+[node name="Hotbar" type="HBoxContainer" parent="Camera2D/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Slot0" type="Button" parent="Camera2D/UI/Hotbar"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+
+[node name="Slot1" type="Button" parent="Camera2D/UI/Hotbar"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+
+[node name="Slot2" type="Button" parent="Camera2D/UI/Hotbar"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+
+[node name="MessageLabel" type="Label" parent="Camera2D/UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="LoopTimer" type="Label" parent="Camera2D/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
